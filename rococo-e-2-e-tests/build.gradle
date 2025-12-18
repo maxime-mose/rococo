@@ -1,0 +1,40 @@
+import static java.nio.charset.StandardCharsets.UTF_8
+
+plugins {
+    id 'io.qameta.allure' version '3.0.1'
+    id 'io.qameta.allure-adapter' version '3.0.1'
+}
+
+ext {
+    junitVersion = '5.14.1'
+    selenideVersion = '7.13.0'
+    springJdbcVersion = '6.2.15'
+    springSecurityCryptoVersion = '6.5.7'
+    wiremockVersion = '3.13.2'
+    datafakerVersion = '2.5.3'
+    logbackVersion = '1.5.22'
+    slf4jVersion = '2.0.17'
+}
+
+group = 'io.student'
+version = '1.0.0'
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testImplementation "com.codeborne:selenide:${selenideVersion}"
+    testImplementation "org.springframework:spring-jdbc:${springJdbcVersion}"
+    testImplementation "org.springframework.security:spring-security-crypto:${springSecurityCryptoVersion}"
+    testImplementation "org.wiremock:wiremock:${wiremockVersion}"
+    testImplementation("net.datafaker:datafaker:${datafakerVersion}")
+    testImplementation "ch.qos.logback:logback-classic:${logbackVersion}"
+    testRuntimeOnly "mysql:mysql-connector-java:${project.ext.mysqlDriverVersion}"
+    testRuntimeOnly "org.slf4j:slf4j-api:${slf4jVersion}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = UTF_8.name()
+}
+
+test {
+    useJUnitPlatform()
+}

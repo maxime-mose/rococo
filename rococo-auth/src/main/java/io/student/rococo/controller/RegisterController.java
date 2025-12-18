@@ -48,7 +48,7 @@ public class RegisterController {
   }
 
   @PostMapping(value = "/register")
-  public String registerUser(@Valid @ModelAttribute RegistrationForm registrationForm,
+  public String registerUser(@Valid @ModelAttribute("registrationModel") RegistrationForm registrationForm,
                              Errors errors,
                              Model model,
                              HttpServletResponse response) {
